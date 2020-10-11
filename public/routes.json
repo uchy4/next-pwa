@@ -80,10 +80,10 @@
     },
     {
       "route": "/*",
-      "serve": "/",
+      "serve": "/index.html",
       "statusCode": 200,
       "allowedRoles": [
-        "employee", "administrator", "client", "authenticated"
+        "authenticated"
       ]
     }
   ],
