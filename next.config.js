@@ -11,5 +11,11 @@ module.exports = withMDX(withPWA({
   pwa: {
     disable: !isProd,
     dest: "public"
+  },
+  trailingSlash: true,
+  exportPathMap: function () {
+    return {
+      '/': { page: '/' }
+    };
   }
 }))
