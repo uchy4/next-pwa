@@ -89,19 +89,9 @@
   ],
   "platformErrorOverrides": [
     {
-      "errorType": "NotFound",
-      "statusCode": 302,
-      "serve": "/dashboard"
-    },
-    {
       "errorType": "Unauthenticated",
       "statusCode": 302,
       "serve": "/.auth/login/aad"
-    },
-    {
-      "errorType": "Unauthorized_MissingRoles",
-      "statusCode": 302,
-      "serve": "/dashboard"
     }
   ]
 }
