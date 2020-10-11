@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import fetch from "isomorphic-unfetch";
-import { Container } from "../components/Container";
+import { Container } from "../../components/Container";
 import {
   Typography,
   List,

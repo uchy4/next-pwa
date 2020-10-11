@@ -1,4 +1,5 @@
 import { FunctionComponent, useState } from "react";
+import clsx from 'clsx';
 import {
   AppBar,
   Toolbar,
@@ -58,14 +59,19 @@ export const Container: FunctionComponent = ({ children }) => {
   );
 
   return (
-    <div className={classes.container}>
+    <div className={clsx(classes.container, !mobileOpen && classes.paperShift)}>
       <CssBaseline />
-      <AppBar position="fixed">
+      <AppBar position="fixed" className={clsx(classes.appBar, {
+        [classes.appBarShift]: mobileOpen,
+      })}>
         <Toolbar className={classes.toolbar}>
           <IconButton
-            className={classes.icon}
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
             onClick={() => setMobileOpen(!mobileOpen)}
             children={<MenuIcon />}
+            className={clsx(classes.menuButton, mobileOpen && classes.hide, classes.icon)}
           />
           <Typography variant="h6" children="Next PWA" />
         </Toolbar>
@@ -78,11 +84,11 @@ export const Container: FunctionComponent = ({ children }) => {
             anchor="left"
             open={mobileOpen}
             onClose={() => setMobileOpen(!mobileOpen)}
-            children={content}
             classes={{ paper: classes.drawer }}
             ModalProps={{
               keepMounted: true
             }}
+            children={content}
           />
         </Hidden>
 
@@ -90,14 +96,18 @@ export const Container: FunctionComponent = ({ children }) => {
           <Drawer
             open
             variant="permanent"
+            anchor="left"
             classes={{ paper: classes.drawer }}
             children={content}
           />
         </Hidden>
       </nav>
 
-      <Paper className={classes.paper}>
-        <MdxTagParse children={children} />
+      <Paper className={clsx(classes.paper, !mobileOpen && classes.paperShift)}>
+        <main
+          className={clsx(classes.content, !mobileOpen && classes.contentShift)}>
+          <MdxTagParse children={children} />
+        </main>
         <IsOnline />
       </Paper>
     </div>
@@ -113,13 +123,17 @@ const useStyles = makeStyles((theme: Theme) =>
     toolbar: {
       justifyContent: "space-between"
     },
-    drawer: {
-      width: drawerWidth
-    },
     paper: {
       flexGrow: 1,
       padding: theme.spacing(2),
       margin: theme.spacing(3)
+    },
+    paperShift: {
+      // width: `calc(100% - ${drawerWidth}px)`,
+      // marginLeft: 0,
+      display: "flex",
+      justifyContent: "end",
+      // margin: theme.spacing(3)
     },
     nav: {
       [theme.breakpoints.up("sm")]: {
@@ -128,6 +142,60 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     icon: {
       color: theme.palette.common.white
-    }
+    },
+    root: {
+      display: 'flex',
+    },
+    appBar: {
+      transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+    },
+    appBarShift: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+      transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    hide: {
+      display: 'none',
+    },
+    drawer: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
+    drawerPaper: {
+      width: drawerWidth,
+    },
+    drawerHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      padding: theme.spacing(0, 1),
+      // necessary for content to be below app bar
+      ...theme.mixins.toolbar,
+      justifyContent: 'flex-end',
+    },
+    content: {
+      flexGrow: 1,
+      padding: theme.spacing(1),
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      marginLeft: -drawerWidth,
+    },
+    contentShift: {
+      marginLeft: 0,
+      transition: theme.transitions.create('margin', {
+        easing: theme.transitions.easing.easeOut,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
   })
 );
