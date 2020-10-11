@@ -1,0 +1,107 @@
+{
+  "routes": [
+    {
+      "route": "/admin",
+      "allowedRoles": [
+        "administrator"
+      ]
+    },
+    {
+      "route": "/admin/*",
+      "allowedRoles": [
+        "administrator"
+      ]
+    },
+    {
+      "route": "/client",
+      "allowedRoles": [
+        "client", "administrator"
+      ]
+    },
+    {
+      "route": "/client/*",
+      "allowedRoles": [
+        "client", "administrator"
+      ]
+    },
+    {
+      "route": "employee",
+      "allowedRoles": [
+        "employee", "administrator"
+      ]
+    },
+    {
+      "route": "employee/*",
+      "allowedRoles": [
+        "employee", "administrator"
+      ]
+    },
+    {
+      "route": "/payment",
+      "allowedRoles": [
+        "anonymous", "authenticated"
+      ]
+    },
+    {
+      "route": "/api/v1/admin/*",
+      "allowedRoles": [
+        "administrator"
+      ]
+    },
+    {
+      "route": "/api/employee/*",
+      "allowedRoles": [
+        "employee", "administrator"
+      ]
+    },
+    {
+      "route": "/api/client/*",
+      "allowedRoles": [
+        "client", "administrator"
+      ]
+    },
+    {
+      "route": "/api/public/*",
+      "allowedRoles": [
+        "anonymous", "authenticated"
+      ]
+    },
+    {
+      "route": "/login",
+      "serve": "/.auth/login/aad"
+    },
+    {
+      "route": "/logout",
+      "serve": "/.auth/logout"
+    },
+    {
+      "route": "/api/*",
+      "statusCode": 404
+    },
+    {
+      "route": "/*",
+      "serve": "/",
+      "statusCode": 200,
+      "allowedRoles": [
+        "employee", "administrator", "client", "authenticated"
+      ]
+    }
+  ],
+  "platformErrorOverrides": [
+    {
+      "errorType": "NotFound",
+      "statusCode": 302,
+      "serve": "/dashboard"
+    },
+    {
+      "errorType": "Unauthenticated",
+      "statusCode": 302,
+      "serve": "/.auth/login/aad"
+    },
+    {
+      "errorType": "Unauthorized_MissingRoles",
+      "statusCode": 302,
+      "serve": "/dashboard"
+    }
+  ]
+}
