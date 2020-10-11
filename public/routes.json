@@ -81,17 +81,24 @@
     {
       "route": "/*",
       "serve": "/index.html",
-      "statusCode": 200,
-      "allowedRoles": [
-        "authenticated"
-      ]
+      "statusCode": 200
     }
   ],
   "platformErrorOverrides": [
     {
+      "errorType": "NotFound",
+      "statusCode": 302,
+      "serve": "/"
+    },
+    {
       "errorType": "Unauthenticated",
       "statusCode": 302,
       "serve": "/.auth/login/aad"
+    },
+    {
+      "errorType": "Unauthorized_MissingRoles",
+      "statusCode": 302,
+      "serve": "/"
     }
   ]
 }
