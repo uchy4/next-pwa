@@ -1,6 +1,8 @@
 const isProd = process.env.NODE_ENV === "production";
 
-const withPWA = require("next-pwa")
+const withPWA = require("next-pwa");
+
+const data = require('./utils/staticPaths');
 
 const withMDX = require("@next/mdx")({
   extension: /\.mdx?$/
@@ -13,9 +15,21 @@ module.exports = withMDX(withPWA({
     dest: "public"
   },
   trailingSlash: true,
-  exportPathMap: function () {
-    return {
-      '/': { page: '/' }
+  exportPathMap: async function () {
+    const { staticPaths } = data;
+    const paths = {
+      '/': { page: '/' },
     };
-  }
-}))
+
+    staticPaths.forEach(({ page, title }) => {
+      paths[`/${page}`] = {
+        page: `/${page}`,
+        query: { path: title },
+        // https://github.com/staticwebdev/nextjs-starter/blob/master/utils/projectsData.js
+        // https://docs.microsoft.com/en-us/azure/static-web-apps/deploy-nextjs
+      };
+    });
+
+    return paths;
+  },
+}));
