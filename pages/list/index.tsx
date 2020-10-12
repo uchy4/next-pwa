@@ -9,7 +9,7 @@ import {
   ListItemText
 } from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
-import Link from "next/link";
+// import Link from "next/link";
 
 interface Show {
   id: number;
@@ -21,12 +21,12 @@ const Index: NextPage<{ shows: Array<Show> }> = ({ shows }) => (
     <Typography children="Batman TV Shows" variant="h6" />
     <List>
       {shows.map(show => (
-        <Link key={show.id} href="/list/[id]" as={`/list/${show.id}`}>
+        <a key={show.id} href={`/list/${show.id}`}>{/*was Link key={show.id} href="/list/[id]" as={`/list/${show.id}`}*/}
           <ListItem button>
             <ListItemIcon children={<CheckIcon />} />
             <ListItemText primary={show.name} />
           </ListItem>
-        </Link>
+        </a>
       ))}
     </List>
   </Container>

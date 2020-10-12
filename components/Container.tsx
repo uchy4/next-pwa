@@ -19,7 +19,7 @@ import {
   IconButton
 } from "@material-ui/core";
 
-import Link from "next/link";
+// import Link from "next/link";
 import { IsOnline } from "./IsOnline";
 import { MdxTagParse } from "./MdxTagParse";
 
@@ -37,24 +37,24 @@ export const Container: FunctionComponent = ({ children }) => {
   const content = (
     <>
       <List>
-        <Link href="/">
+        <a href="/">{/*was Link*/}
           <ListItem button component="a">
             <ListItemIcon children={<HomeIcon />} />
             <ListItemText primary="Home" />
           </ListItem>
-        </Link>
+        </a>
       </List>
       <Divider />
-      <List>
+      {/* <List> */}
         {pages.map(text => (
-          <Link key={text} href={`/${text}`}>
+          <a key={text} href={`/${text}`}>{/*was Link*/}
             <ListItem button>
               <ListItemIcon children={<PagesIcon />} />
               <ListItemText primary={text} />
             </ListItem>
-          </Link>
+          </a>
         ))}
-      </List>
+      {/* </List> */}
     </>
   );
 
