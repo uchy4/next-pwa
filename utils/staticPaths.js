@@ -4,7 +4,6 @@ const staticPaths = [
     { page: "employee", query: { title: "index" } },
     { page: "about" },
     { page: "material-theme" },
-    { page: "my-mdx" },
     { page: "list", query: { title: "index" } }
 ];
 
