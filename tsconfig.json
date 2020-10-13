@@ -8,7 +8,7 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
-    // "strict": true,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "noEmit": true,
@@ -25,6 +25,7 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx", "utils/staticPaths.js"
+    "**/*.tsx",
+    "utils/staticPaths.js"
   ]
 }
